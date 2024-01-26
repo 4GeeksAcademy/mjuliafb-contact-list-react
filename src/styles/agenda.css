@@ -9,7 +9,7 @@ img {
 
 i {
     padding: 10px;
-    color:black;
+    color: black;
     text-decoration: none;
 }
 
@@ -23,4 +23,9 @@ p {
 
 .contactList {
     padding: 30px;
+}
+
+.headerAgenda h2 {
+    line-height: 1;
+    margin:0;
 }

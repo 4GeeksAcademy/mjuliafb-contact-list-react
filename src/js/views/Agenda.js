@@ -13,7 +13,13 @@ export const Agenda = () => {
 
 	return (
 		<div className="container">
-			<h1>Agenda</h1>
+			<div className="headerAgenda m-2 d-flex justify-content-between">
+				<h2>Agenda</h2>
+				<Link to="/contact-form">
+					<button type="button" class="btn btn-success">Add a new contact</button>
+				</Link>
+
+			</div>
 			<ul className="list-group">
 				{store.contact.map((item, index) => {
 					return (
