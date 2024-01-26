@@ -1,0 +1,20 @@
+.contactForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.contactForm label {
+    display: block;
+}
+
+.contactForm input {
+    width: 100%;
+}
+
+.contactForm button {
+    width: 100%;
+}
+
+.contactForm h2 {
+    text-align: center;
+}

@@ -1,22 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			contact: [
-				{
-					fullName: "Dave Bradley",
-                    email: "dave@gmail.com",
-                    agenda_slug: "my_super_agenda",
-                    address:"47568 NW 34ST, 33434 FL, USA",
-                    phone:"7864445566"
-				},
-				{
-					fullName: "Matt Damon",
-                    email: "dave@gmail.com",
-                    agenda_slug: "my_super_agenda",
-                    address:"47568 NW 34ST, 33434 FL, USA",
-                    phone:"7864445566"
-				}
-			]
+			contact: []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -24,9 +9,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().changeColor(0, "green");
 			},
 			loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
+				fetch("https://playground.4geeks.com/apis/fake/contact/agenda/la_profe_agenda")
+					.then(res => res.json())
+					.then(data => {
+						setStore({ contact: data });
+					})
 			},
 			changeColor: (index, color) => {
 				//get the store
