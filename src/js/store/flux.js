@@ -5,30 +5,34 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
-			},
+
 			loadSomeData: () => {
-				fetch("https://playground.4geeks.com/apis/fake/contact/agenda/la_profe_agenda")
+				fetch("https://playground.4geeks.com/apis/fake/contact/agenda/limberg")
 					.then(res => res.json())
 					.then(data => {
 						setStore({ contact: data });
 					})
 			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
+			saveContact: formData => {
+				fetch("https://playground.4geeks.com/apis/fake/contact/", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({
+						full_name: formData.fullName,
+						email: formData.email,
+						agenda_slug: "limberg",
+						address: formData.address,
+						phone: formData.phone
+					})
+				})
+					.then(res => res.json())
+					.then(data => {
+						console.log("Contact saved successfully:", data);
+					})
+			},
 
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
-
-				//reset the global store
-				setStore({ demo: demo });
-			}
 		}
 	};
 };
