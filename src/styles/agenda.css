@@ -1,0 +1,24 @@
+img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0px 0px 0px 100px;
+
+}
+
+i {
+    padding: 10px;
+}
+
+.contactItems {
+    margin-right: 600px;
+}
+
+p {
+    margin: 0;
+}
+
+.contactList {
+    padding: 30px;
+}

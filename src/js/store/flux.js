@@ -1,16 +1,20 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			demo: [
+			contact: [
 				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
+					fullName: "Dave Bradley",
+                    email: "dave@gmail.com",
+                    agenda_slug: "my_super_agenda",
+                    address:"47568 NW 34ST, 33434 FL, USA",
+                    phone:"7864445566"
 				},
 				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
+					fullName: "Matt Damon",
+                    email: "dave@gmail.com",
+                    agenda_slug: "my_super_agenda",
+                    address:"47568 NW 34ST, 33434 FL, USA",
+                    phone:"7864445566"
 				}
 			]
 		},
