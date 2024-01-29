@@ -4,7 +4,7 @@ import { Context } from "../store/appContext";
 import "../../styles/contactForm.css";
 
 export const ContactForm = ({ isEditing }) => {
-	const { id } = useParams(); // Obtener el ID del contacto de los parámetros de la URL
+	const { id } = useParams();
 	const { actions, store } = useContext(Context);
 
 	const [formData, setFormData] = useState({
