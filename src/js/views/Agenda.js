@@ -46,7 +46,7 @@ export const Agenda = () => {
 									</div>
 								</div>
 								<div className="col-sm-2 contactIcons d-flex">
-									<Link to={`/edit/${item.id}`}> {/* Concatena el id al final de la URL */}
+									<Link to={`/edit/${item.id}`}>
 										<i className="fa-solid fa-pen"></i>
 									</Link>
 									<i className="fa-solid fa-trash" onClick={() => handleDelete(item.id)}></i>
