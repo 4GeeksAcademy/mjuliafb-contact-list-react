@@ -47,7 +47,7 @@ export const ContactForm = () => {
 				</div>
 				<button type="submit" className="btn btn-primary">Save</button>
 			</form>
-			<Link to={"/agenda"}>
+			<Link to={"/"}>
 				<span>Or get back to Agenda</span>
 			</Link>
 		</div>

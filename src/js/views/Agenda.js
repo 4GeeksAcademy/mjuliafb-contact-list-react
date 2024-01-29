@@ -6,25 +6,37 @@ import "../../styles/agenda.css";
 
 export const Agenda = () => {
 	const { store, actions } = useContext(Context);
+	const [dataLoaded, setDataLoaded] = useState(false);
 
 	useEffect(() => {
-		actions.loadSomeData();
+		actions.loadSomeData()
+			.then(() => setDataLoaded(true))
+			.catch(error => console.error("Error al cargar los datos:", error));
 	}, []);
+
+	const handleDelete = async idIndex => {
+
+		try {
+			await actions.deleteContact(idIndex);
+		} catch (error) {
+			console.error("Error al eliminar el contacto:", error);
+		}
+	};
 
 	return (
 		<div className="container">
 			<div className="headerAgenda m-2 d-flex justify-content-between">
 				<h2>Agenda</h2>
 				<Link to="/contact-form">
-					<button type="button" class="btn btn-success">Add a new contact</button>
+					<button type="button" className="btn btn-success">Add a new contact</button>
 				</Link>
 
 			</div>
-			<ul className="list-group">
+			{dataLoaded && <ul className="list-group">
 				{store.contact.map((item, index) => {
 					return (
 						<li
-							key={index}
+							key={item.id}
 							className="contactList list-group-item d-flex justify-content-between">
 							<div><img src="https://images.unsplash.com/photo-1442458370899-ae20e367c5d8?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" ></img></div>
 							<div className="contactItems">
@@ -37,16 +49,14 @@ export const Agenda = () => {
 								<div><Link to={"/contact-form"}>
 									<i className="fa-solid fa-pen"></i>
 								</Link></div>
-								<div><i className="fa-solid fa-trash"></i></div>
+								<div><i className="fa-solid fa-trash" onClick={() => handleDelete(item.id)}></i></div>
 							</div>
 						</li>
 					);
 				})}
 			</ul>
+			}
 			<br />
-			<Link to="/">
-				<button className="btn btn-primary">Back home</button>
-			</Link>
 		</div>
 	);
 };

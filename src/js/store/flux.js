@@ -4,10 +4,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			contact: []
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
 
 			loadSomeData: () => {
-				fetch("https://playground.4geeks.com/apis/fake/contact/agenda/limberg")
+				return fetch("https://playground.4geeks.com/apis/fake/contact/agenda/limberg")
 					.then(res => res.json())
 					.then(data => {
 						setStore({ contact: data });
@@ -33,6 +32,29 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 			},
 
+			deleteContact: async (id) => {
+				try {
+					const response = await fetch(`https://playground.4geeks.com/apis/fake/contact/${id}`, {
+						method: "DELETE"
+					});
+
+					if (response.ok) {
+						console.log("Contacto eliminado exitosamente");
+
+						const { contact } = getStore();
+						const updatedContactList = contact.filter((item) => item.id !== id);
+						setStore({ contact: updatedContactList });
+
+						return true;
+					} else {
+						console.error("Error al eliminar el contacto:", response.status, response.statusText);
+						return false;
+					}
+				} catch (error) {
+					console.error("Error al eliminar el contacto:", error);
+					return false;
+				}
+			}
 		}
 	};
 };
