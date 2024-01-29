@@ -13,12 +13,13 @@ i {
     text-decoration: none;
 }
 
-.contactItems {
-    margin-right: 600px;
-}
-
 p {
     margin: 0;
+}
+
+.contactItems {
+    text-align: start;
+    margin-left: 20px;
 }
 
 .contactList {
@@ -27,5 +28,10 @@ p {
 
 .headerAgenda h2 {
     line-height: 1;
-    margin:0;
+    margin: 0;
+}
+
+.contactIcons {
+    text-align: end;
+    justify-content: end;
 }

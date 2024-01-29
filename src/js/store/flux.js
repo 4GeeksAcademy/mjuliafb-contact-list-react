@@ -12,9 +12,32 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({ contact: data });
 					})
 			},
-			saveContact: formData => {
-				fetch("https://playground.4geeks.com/apis/fake/contact/", {
-					method: "POST",
+
+			getContactData: async (id) => {
+				try {
+					const response = await fetch(`https://playground.4geeks.com/apis/fake/contact/${id}`, {
+						method: "GET"
+					});
+
+					if (response.ok) {
+						const contactData = await response.json();
+						return contactData;
+					} else {
+						console.error("Error al buscar el contacto:", response.status, response.statusText);
+						return null;
+					}
+				} catch (error) {
+					console.error("Error en el fetch del contacto:", error);
+					return null;
+				}
+			},
+			saveContact: (formData, isEditing, id) => {
+				const url = isEditing ? `https://playground.4geeks.com/apis/fake/contact/${id}` : "https://playground.4geeks.com/apis/fake/contact/";
+
+				const method = isEditing ? "PUT" : "POST";
+
+				fetch(url, {
+					method: method,
 					headers: {
 						"Content-Type": "application/json"
 					},
@@ -28,8 +51,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(res => res.json())
 					.then(data => {
-						console.log("Contact saved successfully:", data);
+						alert("Contact saved successfully:");
 					})
+					.catch(error => {
+						console.error("Error al guardar el contacto:", error);
+					});
 			},
 
 			deleteContact: async (id) => {
@@ -39,7 +65,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 
 					if (response.ok) {
-						console.log("Contacto eliminado exitosamente");
+						alert("Contacto eliminado exitosamente");
 
 						const { contact } = getStore();
 						const updatedContactList = contact.filter((item) => item.id !== id);

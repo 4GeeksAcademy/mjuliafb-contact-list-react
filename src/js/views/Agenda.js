@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/agenda.css";
 
-
 export const Agenda = () => {
 	const { store, actions } = useContext(Context);
 	const [dataLoaded, setDataLoaded] = useState(false);
@@ -15,7 +14,6 @@ export const Agenda = () => {
 	}, []);
 
 	const handleDelete = async idIndex => {
-
 		try {
 			await actions.deleteContact(idIndex);
 		} catch (error) {
@@ -30,33 +28,34 @@ export const Agenda = () => {
 				<Link to="/contact-form">
 					<button type="button" className="btn btn-success">Add a new contact</button>
 				</Link>
-
 			</div>
-			{dataLoaded && <ul className="list-group">
-				{store.contact.map((item, index) => {
-					return (
-						<li
-							key={item.id}
-							className="contactList list-group-item d-flex justify-content-between">
-							<div><img src="https://images.unsplash.com/photo-1442458370899-ae20e367c5d8?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" ></img></div>
-							<div className="contactItems">
-								<h3> {item.full_name} </h3>
-								<p><i className="fa-solid fa-location-dot"></i> {item.address} </p>
-								<p><i className="fa-solid fa-phone"></i> {item.phone} </p>
-								<p> <i className="fa-solid fa-envelope"></i>{item.email} </p>
-							</div>
-							<div className="contactIcons d-flex">
-								<div><Link to={"/contact-form"}>
-									<i className="fa-solid fa-pen"></i>
-								</Link></div>
-								<div><i className="fa-solid fa-trash" onClick={() => handleDelete(item.id)}></i></div>
-							</div>
-						</li>
-					);
-				})}
-			</ul>
-			}
-			<br />
+			<div className="row g-0 text-center">
+				{dataLoaded && <ul className="list-group">
+					{store.contact.map((item, index) => {
+						return (
+							<li key={item.id} className="contactList list-group-item d-flex">
+								<div className="col-sm-10 d-flex">
+									<div>
+										<img src="https://images.unsplash.com/photo-1442458370899-ae20e367c5d8?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+									</div>
+									<div className="contactItems">
+										<h3> {item.full_name} </h3>
+										<p><i className="fa-solid fa-location-dot"></i> {item.address} </p>
+										<p><i className="fa-solid fa-phone"></i> {item.phone} </p>
+										<p> <i className="fa-solid fa-envelope"></i>{item.email} </p>
+									</div>
+								</div>
+								<div className="col-sm-2 contactIcons d-flex">
+									<Link to={`/edit/${item.id}`}> {/* Concatena el id al final de la URL */}
+										<i className="fa-solid fa-pen"></i>
+									</Link>
+									<i className="fa-solid fa-trash" onClick={() => handleDelete(item.id)}></i>
+								</div>
+							</li>
+						);
+					})}
+				</ul>}
+			</div>
 		</div>
 	);
 };
