@@ -51,7 +51,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(res => res.json())
 					.then(data => {
-						alert("Contact saved successfully:");
+						alert(method === "POST" ? "Contact created successfully" : "Contact saved successfully");
 					})
 					.catch(error => {
 						console.error("Error al guardar el contacto:", error);
